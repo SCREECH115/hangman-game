@@ -10,6 +10,8 @@ const words = [
   "gaming",
   "network",
 ];
+const yesSound = new Audio("yes.wav");
+const noSound = new Audio("no.wav");
 const alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 let counter = 0;
 const getAllIndexes = (arr, val) => {
@@ -48,6 +50,7 @@ const createGame = () => {
     letterElement.addEventListener("click", () => {
       let elem = randomWord.split("");
       if (elem.includes(letter)) {
+        yesSound.play();
         letterElement.classList.add("green", "disabled");
         let indexes = getAllIndexes(randomWord, letter);
         let newPassword = password.split("");
@@ -75,6 +78,7 @@ const createGame = () => {
         }
       } else {
         counter += 1;
+        noSound.play();
         loadImage(counter);
         letterElement.classList.add("red", "disabled");
         if (counter >= 9) {
